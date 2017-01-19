@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team554.robot.commands.ExampleCommand;
-import org.usfirst.frc.team554.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team554.robot.commands.*;
+import org.usfirst.frc.team554.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +21,7 @@ import org.usfirst.frc.team554.robot.subsystems.ExampleSubsystem;
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final DriveTrain driveTrain = new DriveTrain();
 	public static OI oi;
 
 	Command autonomousCommand;

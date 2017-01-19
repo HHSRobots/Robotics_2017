@@ -1,16 +1,16 @@
 package org.usfirst.frc.team554.robot.subsystems;
-import org.usfirst.frc.team554.robot.RobotMap;
 
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Joystick;
-
+import org.usfirst.frc.team554.robot.RobotMap;
 /**
  *
  */
@@ -45,6 +45,11 @@ public class DriveTrain extends Subsystem {
     
     public void driveJoystick(Joystick drive_Joystick){
     	drive.arcadeDrive(drive_Joystick, true);
+    }
+    
+    public void driveManual(double rightSpeed, double leftSpeed){
+    	leftDriveWheels.set(leftSpeed);
+    	rightDriveWheels.set(rightSpeed);
     }
     
     //Get distance driven
