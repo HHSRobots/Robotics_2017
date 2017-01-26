@@ -14,6 +14,8 @@ public class RobotMap {
 	public static int rtDrvMtr = 8; //Right Drive Motor PWM Channel
 	public static int ltDrvMtr = 9; //Left Drive Motor PWM Channel
 	
+	public static int shotMtr = 2; //Shooter Motor PWM Channel
+	
 	//Solenoids
 	public static int gearShiftSolenoid = 0; //Gear Shift Solenoid Channel
 	
@@ -23,16 +25,20 @@ public class RobotMap {
 	public static int ltDrvEncA = 4; //Left Drive Motor Encoder Channel A
 	public static int ltDrvEncB = 5; //Left Drive Motor Encoder Channel B
 	
+	public static int shotEncA = 6; //Shooter motor encoder Channel A
+	public static int shotEncB = 7; //Shooter motor encoder Channel B
+	
 	//Analog / Gyro
 	public static int driveGyro = 0; //Gyro Analog Channel 0
 	
-	
-	
-
-	
+		
 	//Constants
 	public static double drvDistPerPulse = 0.0486947*127/134; //Encoder Distance per pulse, TODO edit when wheel size chosen
+	public static double shotDistPerPulse = 1/(20.*35/29); //Encoder Distance per pulse, TODO update with final info.
 	
+	public static double shotPidKp = 0.0008;
+	public static double shotPidKi = 0.0019;
+	public static double shotPidKd = 0.0;
 	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

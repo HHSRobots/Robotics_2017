@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team554.robot.RobotMap;
+
 /**
  *
  */
@@ -21,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	private RobotDrive drive;
 	private AnalogGyro driveGyro;
     private Solenoid gearShift;
-    
+        
     public DriveTrain(){
     	super();
     	leftDriveWheels = new VictorSP(RobotMap.ltDrvMtr);
@@ -34,6 +35,7 @@ public class DriveTrain extends Subsystem {
     	rightDriveEncoder.setDistancePerPulse(RobotMap.drvDistPerPulse);
     	gearShift = new Solenoid(RobotMap.gearShiftSolenoid);
     	driveGyro =new AnalogGyro(RobotMap.driveGyro);
+    	
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -51,6 +53,7 @@ public class DriveTrain extends Subsystem {
     	leftDriveWheels.set(leftSpeed);
     	rightDriveWheels.set(rightSpeed);
     }
+    
     
     //Get distance driven
     public double getDriveDistance(){
