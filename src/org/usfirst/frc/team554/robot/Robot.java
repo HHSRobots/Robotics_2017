@@ -23,6 +23,8 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final Shooter shooter = new Shooter();
+	public static final Collector collector = new Collector();
 	Preferences prefs;
 	
 	
@@ -44,7 +46,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		
+		log();
 		
 	}
 
@@ -96,6 +98,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 	}
 
 	@Override
@@ -108,6 +111,10 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		
 		RobotMap.shotPidKp = prefs.getDouble("ShooterKp", 0.0008);
+		RobotMap.shotPidKi = prefs.getDouble("ShooterKi", 0.0019);
+		RobotMap.shotPidKd = prefs.getDouble("ShooterKd", 0.0);
+		
+		RobotMap.shotSetPoint = prefs.getDouble("ShooterSetPoint", 2500);
 		
 	}
 
@@ -117,6 +124,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 	}
 
 	/**
@@ -125,5 +133,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	
+	private void log(){
+		collector.log();
+		shooter.log();
+		driveTrain.log();
 	}
 }

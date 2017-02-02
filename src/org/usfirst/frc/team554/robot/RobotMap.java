@@ -15,6 +15,7 @@ public class RobotMap {
 	public static int ltDrvMtr = 9; //Left Drive Motor PWM Channel
 	
 	public static int shotMtr = 2; //Shooter Motor PWM Channel
+	public static int collMtr = 3; //Collector Motor PWM Channel
 	
 	//Solenoids
 	public static int gearShiftSolenoid = 0; //Gear Shift Solenoid Channel
@@ -39,6 +40,12 @@ public class RobotMap {
 	public static double shotPidKp = 0.0008;
 	public static double shotPidKi = 0.0019;
 	public static double shotPidKd = 0.0;
+	
+	public static double shotSetPoint = 2300;
+	
+	
+	public static double collectSetIn = 1.0;
+	public static double collectSetOut = -1.0;
 	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
