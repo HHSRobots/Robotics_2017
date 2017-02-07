@@ -4,12 +4,14 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team554.robot.RobotMap;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,39 +24,7 @@ public class Camera extends Subsystem {
 	
 	public Camera(){
 		super();
-		visionThread = new Thread(() -> {
-			// Get the UsbCamera from CameraServer
-			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-			// Set the resolution
-			camera.setResolution(640, 480);
-
-			// Get a CvSink. This will capture Mats from the camera
-			CvSink cvSink = CameraServer.getInstance().getVideo();
-			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Rectangle", 640, 480);
-
-			// Mats are very memory expensive. Lets reuse this Mat.
-			Mat mat = new Mat();
-
-			// This cannot be 'true'. The program will never exit if it is. This
-			// lets the robot stop this thread when restarting robot code or
-			// deploying.
-			while (!Thread.interrupted()) {
-				// Tell the CvSink to grab a frame from the camera and put it
-				// in the source mat.  If there is an error notify the output.
-				if (cvSink.grabFrame(mat) == 0) {
-					// Send the output the error.
-					outputStream.notifyError(cvSink.getError());
-					// skip the rest of the current iteration
-					continue;
-				}
-				// Put a rectangle on the image
-				Imgproc.rectangle(mat, new Point(100, 100), new Point(400, 400),
-						new Scalar(255, 255, 255), 5);
-				// Give the output stream a new image to display
-				outputStream.putFrame(mat);
-			}
-		});
+		
 		
 	}
     public void initDefaultCommand() {
@@ -62,7 +32,46 @@ public class Camera extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void updateCam(){
+    public void startVisionThread(){
+    	visionThread = new Thread(() -> {
+    		UsbCamera cam0 = new UsbCamera("USB Camera 0",0);
+    		cam0.setResolution(RobotMap.cameraWidth, RobotMap.cameraHeigth);
+    		cam0.setFPS(RobotMap.cameraFR);
+    		UsbCamera cam1 = new UsbCamera("USB Camera 1",1);
+    		cam1.setResolution(RobotMap.cameraWidth, RobotMap.cameraHeigth);
+    		cam1.setFPS(RobotMap.cameraFR);
+    		
+    		CvSink cvSink = CameraServer.getInstance().getVideo(cam0);
+    		CvSource cvSource = CameraServer.getInstance().putVideo("Current View", 640, 480);
+    		Mat image = new Mat();
+    		
+    		while(!Thread.interrupted()) {
+    			if (cvSink.grabFrame(image) == 0) {
+    				// Send the output the error.
+    				cvSource.notifyError(cvSink.getError());
+    				// skip the rest of the current iteration
+    				continue;
+    			}
+            	       	
+                if(RobotMap.shootCameraSelected){
+                	cvSink.setSource(cam0);
+                } else{
+                	cvSink.setSource(cam1);   
+                }
+                
+                Imgproc.line(image, new Point(RobotMap.cameraHeigth/2,0), new Point(RobotMap.cameraHeigth/2,RobotMap.cameraWidth),new Scalar(255, 255, 255),5);
+                Imgproc.line(image, new Point(0,RobotMap.cameraWidth/2), new Point(RobotMap.cameraHeigth,RobotMap.cameraWidth/2),new Scalar(255, 0, 0),5);
+                cvSource.putFrame(image);
+            }
+		});
+    }
+    
+    public void changeCam(){
+    	RobotMap.shootCameraSelected = !RobotMap.shootCameraSelected;    	
+    }
+    
+    public void log(){
+    	SmartDashboard.putBoolean("Shooter Camera Selected", RobotMap.shootCameraSelected);
     }
 }
 

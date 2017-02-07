@@ -21,14 +21,19 @@ import org.usfirst.frc.team554.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 
+	public static OI oi;
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Shooter shooter = new Shooter();
 	public static final Collector collector = new Collector();
+	public static final Camera camera = new Camera();
+	public static final Agitator agitator =new Agitator();
+	public static final PDP pdp = new PDP();
+	public static final Pnumatics pnumatics = new Pnumatics();
 	Preferences prefs;
 	
 	
-	public static OI oi;
+	
 	
 	
 
@@ -43,6 +48,14 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		prefs = Preferences.getInstance();
+		
+		pnumatics.start();
+		
+		//Camera Defaults
+		RobotMap.shootCameraSelected = true;
+		camera.startVisionThread();
+		
+		
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -115,6 +128,8 @@ public class Robot extends IterativeRobot {
 		RobotMap.shotPidKd = prefs.getDouble("ShooterKd", 0.0);
 		
 		RobotMap.shotSetPoint = prefs.getDouble("ShooterSetPoint", 2500);
+		RobotMap.feederSpeed = prefs.getDouble("FeederSpeed", 1.0);
+		RobotMap.agitatorSpeed = prefs.getDouble("Agitator Speed", 1.0);
 		
 	}
 
@@ -136,8 +151,11 @@ public class Robot extends IterativeRobot {
 	}
 	
 	private void log(){
+		agitator.log();
 		collector.log();
 		shooter.log();
 		driveTrain.log();
+		camera.log();
+		pdp.log();
 	}
 }

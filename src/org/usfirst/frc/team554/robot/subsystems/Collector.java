@@ -21,6 +21,7 @@ public class Collector extends Subsystem {
 		super();
 		CollectorMotor = new Victor(RobotMap.collMtr);
 		CollectorMotor.setInverted(false);
+		colMotorIndicator = 0;
 	}
 
     public void initDefaultCommand() {

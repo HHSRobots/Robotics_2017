@@ -5,8 +5,8 @@ import org.usfirst.frc.team554.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,9 +21,11 @@ public class Shooter extends Subsystem {
 	private Encoder ShooterEncoder;
 	private PIDController ShooterPID;
 	
+	private SpeedController FeederMotor;
+	
 	public Shooter(){
 		super();
-		ShooterMotor = new Victor(RobotMap.shotMtr);
+		ShooterMotor = new Spark(RobotMap.shotMtr);
 		ShooterMotor.setInverted(false);
 		ShooterEncoder = new Encoder(RobotMap.shotEncA,RobotMap.shotEncB);
 		ShooterEncoder.setDistancePerPulse(RobotMap.shotDistPerPulse);
@@ -34,6 +36,7 @@ public class Shooter extends Subsystem {
 		ShooterPID = new PIDController(RobotMap.shotPidKp,RobotMap.shotPidKi,RobotMap.shotPidKd,ShooterEncoder,ShooterMotor);
 		ShooterPID.setInputRange(0.0,120.0); //set as 7200 rpm or 120rps
 		
+		FeederMotor = new Spark(RobotMap.feedMtr);
 		
 	}
 
@@ -56,6 +59,10 @@ public class Shooter extends Subsystem {
 	
 	public void ResetEncoder(){
 		ShooterEncoder.reset();
+	}
+	
+	public void setFeederMotorSpeed(double speed){
+		FeederMotor.set(speed);
 	}
 	
 	public void log(){

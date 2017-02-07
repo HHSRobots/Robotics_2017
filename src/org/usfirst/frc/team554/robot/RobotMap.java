@@ -15,7 +15,10 @@ public class RobotMap {
 	public static int ltDrvMtr = 9; //Left Drive Motor PWM Channel
 	
 	public static int shotMtr = 2; //Shooter Motor PWM Channel
-	public static int collMtr = 3; //Collector Motor PWM Channel
+	public static int feedMtr = 3; //Feeder Motor PWM Channel
+	public static int agidMtr = 4; //agitator motor
+	public static int collMtr = 5; //Collector Motor PWM Channel
+	public static int clmbMtr = 6; //Climber Motor PWM Channel
 	
 	//Solenoids
 	public static int gearShiftSolenoid = 0; //Gear Shift Solenoid Channel
@@ -46,6 +49,17 @@ public class RobotMap {
 	
 	public static double collectSetIn = 1.0;
 	public static double collectSetOut = -1.0;
+	
+	public static int cameraWidth = 640;
+	public static int cameraHeigth = 480;
+	public static int cameraFR = 30;
+	public static boolean shootCameraSelected = true;
+	
+	
+	public static double feederSpeed = 1.0;
+	public static double agitatorSpeed = 1.0;
+	
+	
 	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
