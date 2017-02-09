@@ -130,13 +130,13 @@ public class Robot extends IterativeRobot {
 		
 		RobotMap.shotSetPoint = prefs.getDouble("ShooterSetPoint", 2500);
 		RobotMap.feederSpeed = prefs.getDouble("FeederSpeed", 1.0);
-		RobotMap.agitator1Speed = prefs.getDouble("Agitator 1 Speed", 1.0);
-		RobotMap.agitator2Speed = prefs.getDouble("Agitator 2 Speed", 1.0);
+		RobotMap.agitator1Speed = prefs.getDouble("Agitator1Speed", 1.0);
+		RobotMap.agitator2Speed = prefs.getDouble("Agitator2Speed", 1.0);
 		
-		RobotMap.clmbCurrLimit = prefs.getDouble("Climb Current Limit", 10.0);
-		RobotMap.clmbSpeed = prefs.getDouble("Climb Speed", 1.0);
+		RobotMap.clmbCurrLimit = prefs.getDouble("ClimbCurrentLimit", 10.0);
+		RobotMap.clmbSpeed = prefs.getDouble("ClimbSpeed", 1.0);
 		
-		RobotMap.DistanceToSlowDown = prefs.getDouble("Distance to Slow Down", 20.0);
+		RobotMap.DistanceToSlowDown = prefs.getDouble("DistanceSlowDown", 20.0);
 		
 	}
 
