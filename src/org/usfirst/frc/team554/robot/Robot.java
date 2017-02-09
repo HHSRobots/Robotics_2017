@@ -55,7 +55,12 @@ public class Robot extends IterativeRobot {
 		//Camera Defaults
 		RobotMap.shootCameraSelected = true;
 		camera.startVisionThread();
+		
+		
 		RobotMap.ClimbComplete = false;
+		
+		driveTrain.resetEncoder();
+		shooter.ResetEncoder();
 		
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
