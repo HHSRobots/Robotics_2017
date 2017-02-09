@@ -3,7 +3,7 @@ package org.usfirst.frc.team554.robot.subsystems;
 import org.usfirst.frc.team554.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +19,7 @@ public class Collector extends Subsystem {
 	private int colMotorIndicator;
 	public Collector(){
 		super();
-		CollectorMotor = new Victor(RobotMap.collMtr);
+		CollectorMotor = new Talon(RobotMap.collMtr);
 		CollectorMotor.setInverted(false);
 		colMotorIndicator = 0;
 	}

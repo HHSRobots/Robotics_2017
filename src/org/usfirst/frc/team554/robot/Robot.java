@@ -30,11 +30,12 @@ public class Robot extends IterativeRobot {
 	public static final Agitator agitator =new Agitator();
 	public static final PDP pdp = new PDP();
 	public static final Pnumatics pnumatics = new Pnumatics();
+	public static final Gear gear = new Gear();
+	public static final Climb climb = new Climb();
 	Preferences prefs;
 	
 	
-	
-	
+
 	
 
 	Command autonomousCommand;
@@ -54,7 +55,7 @@ public class Robot extends IterativeRobot {
 		//Camera Defaults
 		RobotMap.shootCameraSelected = true;
 		camera.startVisionThread();
-		
+		RobotMap.ClimbComplete = false;
 		
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -129,7 +130,13 @@ public class Robot extends IterativeRobot {
 		
 		RobotMap.shotSetPoint = prefs.getDouble("ShooterSetPoint", 2500);
 		RobotMap.feederSpeed = prefs.getDouble("FeederSpeed", 1.0);
-		RobotMap.agitatorSpeed = prefs.getDouble("Agitator Speed", 1.0);
+		RobotMap.agitator1Speed = prefs.getDouble("Agitator 1 Speed", 1.0);
+		RobotMap.agitator2Speed = prefs.getDouble("Agitator 2 Speed", 1.0);
+		
+		RobotMap.clmbCurrLimit = prefs.getDouble("Climb Current Limit", 10.0);
+		RobotMap.clmbSpeed = prefs.getDouble("Climb Speed", 1.0);
+		
+		RobotMap.DistanceToSlowDown = prefs.getDouble("Distance to Slow Down", 20.0);
 		
 	}
 
@@ -157,5 +164,8 @@ public class Robot extends IterativeRobot {
 		driveTrain.log();
 		camera.log();
 		pdp.log();
+		climb.log();
+		gear.log();
+		SmartDashboard.putBoolean("Climb Complete", RobotMap.ClimbComplete);
 	}
 }

@@ -54,6 +54,21 @@ public class DriveTrain extends Subsystem {
     	rightDriveWheels.set(rightSpeed);
     }
     
+    public void driveAutomaticStraight(double speed, double distance){
+    	resetEncoder();
+    	if ( Math.abs( speed) > 0.4 ){
+    		if ( (distance - getDriveDistance()) <= RobotMap.DistanceToSlowDown && (distance - getDriveDistance()) > 0 ){
+    			speed = ((speed - 0.4) / 20 * (distance - getDriveDistance()) + 0.4);
+    		}
+    		else if ( (getDriveDistance()- distance ) <= RobotMap.DistanceToSlowDown && (getDriveDistance()- distance) > 0 ){
+    			speed =  -1*((speed - 0.4) / 20 * (distance - getDriveDistance()) + 0.4);
+    		}
+    		
+    	}	
+    	
+    	drive.arcadeDrive(-speed,0);
+    }
+    
     
     //Get distance driven
     public double getDriveDistance(){

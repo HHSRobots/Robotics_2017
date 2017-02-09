@@ -1,19 +1,18 @@
 package org.usfirst.frc.team554.robot.commands;
 
 import org.usfirst.frc.team554.robot.Robot;
-import org.usfirst.frc.team554.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Agitator_Start extends Command {
+public class Climb_stop extends Command {
 
-    public Agitator_Start() {
+    public Climb_stop() {
+    	requires(Robot.climb);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.agitator);
     }
 
     // Called just before this Command runs the first time
@@ -26,12 +25,12 @@ public class Agitator_Start extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.agitator.agitatorMotorSetSpeed(RobotMap.agitator1Speed, RobotMap.agitator2Speed);
+    	Robot.climb.climbMotorSetSpeed(0.0);
     }
 
     // Called when another command which requires one or more of the same

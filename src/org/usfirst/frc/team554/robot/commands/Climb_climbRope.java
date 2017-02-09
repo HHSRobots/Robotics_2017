@@ -8,12 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Agitator_Start extends Command {
+public class Climb_climbRope extends Command {
 
-    public Agitator_Start() {
+    public Climb_climbRope() {
+    	requires(Robot.climb);
+    	requires(Robot.pdp);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.agitator);
     }
 
     // Called just before this Command runs the first time
@@ -22,16 +23,22 @@ public class Agitator_Start extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(!RobotMap.ClimbComplete && (Robot.pdp.channelCurrent(RobotMap.clmbPDPch) < RobotMap.clmbCurrLimit)){
+    		Robot.climb.climbMotorSetSpeed(RobotMap.clmbSpeed);
+    	}
+    	else{
+    		RobotMap.ClimbComplete = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return RobotMap.ClimbComplete;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.agitator.agitatorMotorSetSpeed(RobotMap.agitator1Speed, RobotMap.agitator2Speed);
+    	Robot.climb.climbMotorSetSpeed(0.0);
     }
 
     // Called when another command which requires one or more of the same
