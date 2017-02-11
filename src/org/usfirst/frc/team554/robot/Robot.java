@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team554.robot.commands.*;
+//import org.usfirst.frc.team554.robot.commands.*;
 import org.usfirst.frc.team554.robot.subsystems.*;
 
 /**
@@ -32,6 +32,10 @@ public class Robot extends IterativeRobot {
 	public static final Pnumatics pnumatics = new Pnumatics();
 	public static final Gear gear = new Gear();
 	public static final Climb climb = new Climb();
+	public static final ThumbWheel thumbwheel = new ThumbWheel();
+	
+	public int autoProgramNumber;
+	
 	Preferences prefs;
 	
 	
@@ -39,7 +43,7 @@ public class Robot extends IterativeRobot {
 	
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	//SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -62,10 +66,11 @@ public class Robot extends IterativeRobot {
 		driveTrain.resetEncoder();
 		shooter.ResetEncoder();
 		
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		/*chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		log();
+		*/
 		
 	}
 
@@ -97,7 +102,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = chooser.getSelected();
+		autoProgramNumber = thumbwheel.getThumbWheelval();
+		
+		switch (autoProgramNumber) {
+		case 1: ;
+			break;
+		default: ;//do nothing
+		};
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -171,6 +183,7 @@ public class Robot extends IterativeRobot {
 		pdp.log();
 		climb.log();
 		gear.log();
+		thumbwheel.log();
 		SmartDashboard.putBoolean("Climb Complete", RobotMap.ClimbComplete);
 	}
 }
