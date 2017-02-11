@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Agitator_Start extends Command {
+public class Agitator_Toggle extends Command {
 
-    public Agitator_Start() {
+    public Agitator_Toggle() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.agitator);
@@ -31,7 +31,15 @@ public class Agitator_Start extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.agitator.agitatorMotorSetSpeed(RobotMap.agitator1Speed, RobotMap.agitator2Speed);
+    	if(RobotMap.agitatorOn){
+    		Robot.agitator.agitatorMotorSetSpeed(0.0, 0.0);
+    		
+    	}
+    	else{
+    		Robot.agitator.agitatorMotorSetSpeed(RobotMap.agitator1Speed, RobotMap.agitator2Speed);
+    	}
+    	RobotMap.agitatorOn = !RobotMap.agitatorOn;
+    	
     }
 
     // Called when another command which requires one or more of the same

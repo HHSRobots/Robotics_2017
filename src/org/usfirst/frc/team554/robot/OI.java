@@ -1,5 +1,8 @@
 package org.usfirst.frc.team554.robot;
 
+import org.usfirst.frc.team554.robot.commands.*;
+
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -11,37 +14,64 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	// Joystick: Logitech Controller( Driver)
+	// Logitech Controller( Driver)
 		
-	    Joystick driverJoystick = new Joystick(0);
-	    Button trigger = new JoystickButton(driverJoystick,1);
-	    Button missleButton = new JoystickButton(driverJoystick,2);
-	    Button button3 = new JoystickButton(driverJoystick,3);
-	    Button button4 = new JoystickButton(driverJoystick,4);
-	    Button button5 = new JoystickButton(driverJoystick,5);
-	    Button button6 = new JoystickButton(driverJoystick,6);
-	    Button button7 = new JoystickButton(driverJoystick,7);
-	    Button button8 = new JoystickButton(driverJoystick,8);
-	    Button button9 = new JoystickButton(driverJoystick,9);
-	    Button button10 = new JoystickButton(driverJoystick,10);
+	    Joystick driverController = new Joystick(0);
+	    Button driverButton1 = new JoystickButton(driverController,1);
+	    Button driverButton2 = new JoystickButton(driverController,2);
+	    Button driverButton3 = new JoystickButton(driverController,3);
+	    Button driverButton4 = new JoystickButton(driverController,4);
+	    Button driverButton5 = new JoystickButton(driverController,5);
+	    Button driverButton6 = new JoystickButton(driverController,6);
+	    Button driverButton7 = new JoystickButton(driverController,7);
+	    Button driverButton8 = new JoystickButton(driverController,8);
+	    Button driverButton9 = new JoystickButton(driverController,9);
+	    Button driverButton10 = new JoystickButton(driverController,10);
 	
     // Xbox Controller
 	    //Fix assignments when get button lay out.
-		Joystick xboxController = new Joystick(1);
-		Button A = new JoystickButton(xboxController, 1);
-		Button B = new JoystickButton(xboxController, 2);
-		Button X = new JoystickButton(xboxController, 3);
-	    Button Y = new JoystickButton(xboxController, 4);
-	    Button LB = new JoystickButton(xboxController, 5);
-		Button RB = new JoystickButton(xboxController, 6);
-	
+		Joystick operatorController = new Joystick(1);
+		Button A = new JoystickButton(operatorController, 1);
+		Button B = new JoystickButton(operatorController, 2);
+		Button X = new JoystickButton(operatorController, 3);
+	    Button Y = new JoystickButton(operatorController, 4);
+	    Button LB = new JoystickButton(operatorController, 5);
+		Button RB = new JoystickButton(operatorController, 6);
+	    //BeaterBarShootTrigger BBShootButton = new BeaterBarShootTrigger(operatorController);
+	    //BeaterBarCollectTrigger BBCollectButton = new BeaterBarCollectTrigger(operatorController);
+	    //ArmMoveWithJoystickTrigger MoveArmWithJoystickButton = new ArmMoveWithJoystickTrigger(operatorController);
+
+	    //Both of the triggers need to be set as their relative axis
+		Button LTrigger = new JoystickButton(operatorController, 7);
+		Button RTrigger = new JoystickButton(operatorController, 8);
+	    Button LStickButton = new JoystickButton(operatorController, 9);
+	    Button RStickButton = new JoystickButton(operatorController,10);
 	
 	public Joystick getDriver(){
-		return driverJoystick;
+		return driverController;
 	}
 	
 	public Joystick getXboxController(){
-		return xboxController;
+		return operatorController;
+	}
+	
+	public OI(){
+		
+		//Driver Controller
+		driverButton6.whenPressed(new DriveTrain_EngageHighGear());
+		driverButton5.whenPressed(new DriveTrain_EngageLowGear());
+		driverButton8.whenPressed(new Camera_switch());
+		
+		//Operator Controller
+		RB.whileHeld(new Climb_climbRope());
+		LB.whenPressed(new Agitator_Toggle());
+		
+		A.whenPressed(new Collector_In());
+		B.whenPressed(new Collector_Stop());
+		Y.whenPressed(new Gear_BoxMove());
+		
+		
+		
 	}
 	
 	//// CREATING BUTTONS

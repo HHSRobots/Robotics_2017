@@ -62,6 +62,8 @@ public class RobotMap {
 	public static double agitator1Speed;
 	public static double agitator2Speed;
 	
+	public static boolean agitatorOn = false;
+	
 	public static int clmbPDPch = 15;
 	public static double clmbCurrLimit;
 	public static double clmbSpeed;
