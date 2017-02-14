@@ -15,6 +15,12 @@ public class PDP extends Subsystem {
     // here. Call these from Commands.
 	private PowerDistributionPanel pdp;
 	
+	public PDP(){
+    	super();
+    	pdp = new PowerDistributionPanel();
+    	
+    }
+	
 	public double channelCurrent(int channel){
 		return pdp.getCurrent(channel);
 	}
