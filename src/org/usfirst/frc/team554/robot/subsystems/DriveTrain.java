@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team554.robot.RobotMap;
+import org.usfirst.frc.team554.robot.commands.DriveTrain_JoystickDrive;
 
 /**
  *
@@ -41,8 +42,7 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new DriveTrain_JoystickDrive());
     }
     
     public void driveJoystick(Joystick drive_Joystick){
