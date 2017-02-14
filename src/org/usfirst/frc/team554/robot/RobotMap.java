@@ -56,6 +56,7 @@ public class RobotMap {
 	public static int cameraHeigth = 480;
 	public static int cameraFR = 30;
 	public static boolean shootCameraSelected = true;
+	public static boolean shootCameraSelectedPrev = true;
 	
 	
 	public static double feederSpeed;

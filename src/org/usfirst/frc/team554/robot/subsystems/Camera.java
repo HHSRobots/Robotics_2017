@@ -52,21 +52,24 @@ public class Camera extends Subsystem {
     				// skip the rest of the current iteration
     				continue;
     			}
-            	       	
-                if(RobotMap.shootCameraSelected){
-                	cvSink.setSource(cam0);
-                } else{
-                	cvSink.setSource(cam1);   
-                }
+            	
+	                if(RobotMap.shootCameraSelected){	                	
+	                	cvSink.setSource(cam0);
+	                } else{
+	                	cvSink.setSource(cam1);   
+	                }
                 
-                Imgproc.line(image, new Point(RobotMap.cameraHeigth/2,0), new Point(RobotMap.cameraHeigth/2,RobotMap.cameraWidth),new Scalar(255, 255, 255),5);
-                Imgproc.line(image, new Point(0,RobotMap.cameraWidth/2), new Point(RobotMap.cameraHeigth,RobotMap.cameraWidth/2),new Scalar(255, 0, 0),5);
+                Imgproc.line(image, new Point(0,RobotMap.cameraHeigth/2), new Point(RobotMap.cameraWidth,RobotMap.cameraHeigth/2),new Scalar(255, 255, 255),5);
+                Imgproc.line(image, new Point(RobotMap.cameraWidth/2,0), new Point(RobotMap.cameraWidth/2,RobotMap.cameraHeigth),new Scalar(255, 0, 0),5);
                 cvSource.putFrame(image);
             }
 		});
+    	visionThread.setDaemon(true);
+		visionThread.start();
     }
     
     public void changeCam(){
+    
     	RobotMap.shootCameraSelected = !RobotMap.shootCameraSelected;    	
     }
     
