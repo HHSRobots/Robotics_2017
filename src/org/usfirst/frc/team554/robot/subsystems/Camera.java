@@ -1,4 +1,4 @@
-package org.usfirst.frc.team554.robot.subsystems;
+	package org.usfirst.frc.team554.robot.subsystems;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -41,23 +41,37 @@ public class Camera extends Subsystem {
     		cam1.setResolution(RobotMap.cameraWidth, RobotMap.cameraHeigth);
     		cam1.setFPS(RobotMap.cameraFR);
     		
-    		CvSink cvSink = CameraServer.getInstance().getVideo(cam0);
+    		CvSink cvSink1 = CameraServer.getInstance().getVideo(cam0);
+    		CvSink cvSink2 = CameraServer.getInstance().getVideo(cam1);
     		CvSource cvSource = CameraServer.getInstance().putVideo("Current View", 640, 480);
     		Mat image = new Mat();
     		
     		while(!Thread.interrupted()) {
-    			if (cvSink.grabFrame(image) == 0) {
+    			/*
+    			if (cvSink1.grabFrame(image) == 0) {
     				// Send the output the error.
-    				cvSource.notifyError(cvSink.getError());
+    				cvSource.notifyError(cvSink1.getError());
     				// skip the rest of the current iteration
     				continue;
     			}
-            	
-	                if(RobotMap.shootCameraSelected){	                	
-	                	cvSink.setSource(cam0);
-	                } else{
-	                	cvSink.setSource(cam1);   
-	                }
+    			
+    			if (cvSink2.grabFrame(image) == 0) {
+    				// Send the output the error.
+    				cvSource.notifyError(cvSink2.getError());
+    				// skip the rest of the current iteration
+    				continue;
+    			}
+            	*/
+    			
+                if(RobotMap.shootCameraSelected){
+                	cvSink2.setEnabled(false);
+                	cvSink1.setEnabled(true);
+                	cvSink1.grabFrame(image);
+                } else{
+                	cvSink1.setEnabled(false);
+                	cvSink2.setEnabled(true);
+                	cvSink2.grabFrame(image);   
+                }
                 
                 Imgproc.line(image, new Point(0,RobotMap.cameraHeigth/2), new Point(RobotMap.cameraWidth,RobotMap.cameraHeigth/2),new Scalar(255, 255, 255),5);
                 Imgproc.line(image, new Point(RobotMap.cameraWidth/2,0), new Point(RobotMap.cameraWidth/2,RobotMap.cameraHeigth),new Scalar(255, 0, 0),5);
