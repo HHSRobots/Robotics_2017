@@ -23,7 +23,7 @@ public class Agitator extends Subsystem {
     public Agitator(){
     	super();
     	AgitatorMotor1 = new Talon(RobotMap.agidMtr1);
-    	AgitatorMotor1.setInverted(false);
+    	AgitatorMotor1.setInverted(true);
     	
     	AgitatorMotor2 =new Talon(RobotMap.agidMtr2);
     	AgitatorMotor2.setInverted(false);

@@ -9,9 +9,10 @@ public class ShootSequenceStop extends CommandGroup {
 
     public ShootSequenceStop() {
     	
-    	addParallel(new Shooter_Stop());
+    	addSequential(new Shooter_Stop());
     	addParallel(new Shooter_FeederStop());
     	addParallel(new Agitator_Stop());
+    	addParallel(new Collector_Stop());
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

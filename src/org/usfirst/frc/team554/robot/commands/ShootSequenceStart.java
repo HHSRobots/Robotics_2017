@@ -9,7 +9,7 @@ public class ShootSequenceStart extends CommandGroup {
 
     public ShootSequenceStart() {
     	
-    	addSequential(new Shooter_Start());
+    	addParallel(new Shooter_Start());
     	addSequential(new TimeDelay(2.0));
     	addSequential(new Shooter_FeederStart());
     	addParallel(new Agitator_Start());

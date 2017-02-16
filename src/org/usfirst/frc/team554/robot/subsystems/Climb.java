@@ -17,7 +17,7 @@ public class Climb extends Subsystem {
     
     public Climb(){
     	ClimbMotor = new Talon(RobotMap.clmbMtr);
-    	ClimbMotor.setInverted(false);
+    	ClimbMotor.setInverted(true);
     }
     
     public void climbMotorSetSpeed(double setpoint){

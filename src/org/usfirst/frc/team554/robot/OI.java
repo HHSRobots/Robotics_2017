@@ -62,14 +62,16 @@ public class OI {
 		A.whenPressed(new Camera_switch());
 		
 		//Operator Controller
-		RB.whileHeld(new Climb_climbRope());
-		LB.whenPressed(new Agitator_Toggle());
+		oButton5.whileHeld(new Climb_climbRope());
 		
 		oButton2.whenPressed(new CollectSequenceStart());
 		oButton3.whenPressed(new CollectSequenceStop());
 		
 		oButton8.whenPressed(new ShootSequenceStart());
 		oButton7.whenPressed(new ShootSequenceStop());
+		
+		oButton4.whenPressed(new Shooter_Start());
+		oButton6.whenPressed(new Shooter_Stop());
 		
 		
 	}

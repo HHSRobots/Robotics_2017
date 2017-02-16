@@ -42,11 +42,11 @@ public class RobotMap {
 	public static double drvDistPerPulse = 0.0486947*127/134; //Encoder Distance per pulse, TODO edit when wheel size chosen
 	public static double shotDistPerPulse = 1/(20.*35/29); //Encoder Distance per pulse, TODO update with final info.
 	
-	public static double shotPidKp;
-	public static double shotPidKi;
-	public static double shotPidKd;
+	public static double shotPidKp = 0.0008;
+	public static double shotPidKi = 0.0019;
+	public static double shotPidKd = 0.0;
 	
-	public static double shotSetPoint;
+	public static double shotSetPoint = 2500;
 	
 	
 	public static double collectSetIn = 1.0;

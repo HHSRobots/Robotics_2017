@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,8 +26,8 @@ public class Shooter extends Subsystem {
 	
 	public Shooter(){
 		super();
-		ShooterMotor = new Spark(RobotMap.shotMtr);
-		ShooterMotor.setInverted(false);
+		ShooterMotor = new Victor(RobotMap.shotMtr);
+		ShooterMotor.setInverted(true);
 		ShooterEncoder = new Encoder(RobotMap.shotEncA,RobotMap.shotEncB);
 		ShooterEncoder.setDistancePerPulse(RobotMap.shotDistPerPulse);
 		

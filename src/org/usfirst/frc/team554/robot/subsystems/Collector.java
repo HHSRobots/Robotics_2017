@@ -20,7 +20,7 @@ public class Collector extends Subsystem {
 	public Collector(){
 		super();
 		CollectorMotor = new Talon(RobotMap.collMtr);
-		CollectorMotor.setInverted(false);
+		CollectorMotor.setInverted(true);
 		colMotorIndicator = 0;
 	}
 

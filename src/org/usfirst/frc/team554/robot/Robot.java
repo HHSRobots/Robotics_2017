@@ -142,6 +142,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		
+		RobotMap.ClimbComplete = false;
 		RobotMap.shotPidKp = prefs.getDouble("ShooterKp", 0.0008);
 		RobotMap.shotPidKi = prefs.getDouble("ShooterKi", 0.0019);
 		RobotMap.shotPidKd = prefs.getDouble("ShooterKd", 0.0);
