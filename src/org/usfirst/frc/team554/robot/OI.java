@@ -14,62 +14,62 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	// Logitech Controller( Driver)
-		
-	    Joystick driverController = new Joystick(0);
-	    Button driverButton1 = new JoystickButton(driverController,1);
-	    Button driverButton2 = new JoystickButton(driverController,2);
-	    Button driverButton3 = new JoystickButton(driverController,3);
-	    Button driverButton4 = new JoystickButton(driverController,4);
-	    Button driverButton5 = new JoystickButton(driverController,5);
-	    Button driverButton6 = new JoystickButton(driverController,6);
-	    Button driverButton7 = new JoystickButton(driverController,7);
-	    Button driverButton8 = new JoystickButton(driverController,8);
-	    Button driverButton9 = new JoystickButton(driverController,9);
-	    Button driverButton10 = new JoystickButton(driverController,10);
 	
-    // Xbox Controller
+	
+    // Xbox Controller (Driver)
 	    //Fix assignments when get button lay out.
-		Joystick operatorController = new Joystick(1);
-		Button A = new JoystickButton(operatorController, 1);
-		Button B = new JoystickButton(operatorController, 2);
-		Button X = new JoystickButton(operatorController, 3);
-	    Button Y = new JoystickButton(operatorController, 4);
-	    Button LB = new JoystickButton(operatorController, 5);
-		Button RB = new JoystickButton(operatorController, 6);
-	    //BeaterBarShootTrigger BBShootButton = new BeaterBarShootTrigger(operatorController);
-	    //BeaterBarCollectTrigger BBCollectButton = new BeaterBarCollectTrigger(operatorController);
-	    //ArmMoveWithJoystickTrigger MoveArmWithJoystickButton = new ArmMoveWithJoystickTrigger(operatorController);
-
+		Joystick dController = new Joystick(0);
+		Button A = new JoystickButton(dController, 1);
+		Button B = new JoystickButton(dController, 2);
+		Button X = new JoystickButton(dController, 3);
+	    Button Y = new JoystickButton(dController, 4);
+	    Button LB = new JoystickButton(dController, 5);
+		Button RB = new JoystickButton(dController, 6);
+	    
 	    //Both of the triggers need to be set as their relative axis
-		Button LTrigger = new JoystickButton(operatorController, 7);
-		Button RTrigger = new JoystickButton(operatorController, 8);
-	    Button LStickButton = new JoystickButton(operatorController, 9);
-	    Button RStickButton = new JoystickButton(operatorController,10);
+		Button LTrigger = new JoystickButton(dController, 7);
+		Button RTrigger = new JoystickButton(dController, 8);
+	    Button LStickButton = new JoystickButton(dController, 9);
+	    Button RStickButton = new JoystickButton(dController,10);
+	    
+	    // Logitech Controller( Operator)
+		
+	    Joystick oController = new Joystick(1);
+	    Button oButton1 = new JoystickButton(oController,1);
+	    Button oButton2 = new JoystickButton(oController,2);
+	    Button oButton3 = new JoystickButton(oController,3);
+	    Button oButton4 = new JoystickButton(oController,4);
+	    Button oButton5 = new JoystickButton(oController,5);
+	    Button oButton6 = new JoystickButton(oController,6);
+	    Button oButton7 = new JoystickButton(oController,7);
+	    Button oButton8 = new JoystickButton(oController,8);
+	    Button oButton9 = new JoystickButton(oController,9);
+	    Button oButton10 = new JoystickButton(oController,10);
 	
 	public Joystick getDriver(){
-		return driverController;
+		return dController;
 	}
 	
 	public Joystick getXboxController(){
-		return operatorController;
+		return oController;
 	}
 	
 	public OI(){
 		
 		//Driver Controller
-		driverButton6.whenPressed(new DriveTrain_EngageHighGear());
-		driverButton5.whenPressed(new DriveTrain_EngageLowGear());
-		driverButton8.whenPressed(new Camera_switch());
+		RB.whenPressed(new DriveTrain_EngageHighGear());
+		LB.whenPressed(new DriveTrain_EngageLowGear());
+		A.whenPressed(new Camera_switch());
 		
 		//Operator Controller
 		RB.whileHeld(new Climb_climbRope());
 		LB.whenPressed(new Agitator_Toggle());
 		
-		A.whenPressed(new Collector_In());
-		B.whenPressed(new Collector_Stop());
-		Y.whenPressed(new Gear_BoxMove());
+		oButton2.whenPressed(new CollectSequenceStart());
+		oButton3.whenPressed(new CollectSequenceStop());
 		
+		oButton8.whenPressed(new ShootSequenceStart());
+		oButton7.whenPressed(new ShootSequenceStop());
 		
 		
 	}

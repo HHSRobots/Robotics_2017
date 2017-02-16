@@ -65,6 +65,7 @@ public class Robot extends IterativeRobot {
 		
 		driveTrain.resetEncoder();
 		shooter.ResetEncoder();
+		gear.gearDeliveryPiston();
 		
 		/*chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

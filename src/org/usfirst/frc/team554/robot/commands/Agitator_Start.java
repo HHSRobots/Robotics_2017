@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Collector_Out extends Command {
+public class Agitator_Start extends Command {
 
-    public Collector_Out() {
-    	requires(Robot.collector);
+    public Agitator_Start() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.agitator);
     }
 
     // Called just before this Command runs the first time
@@ -31,7 +31,7 @@ public class Collector_Out extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.collectorMotorSetSpeed(RobotMap.collectSetOut);
+    	Robot.agitator.agitatorMotorSetSpeed(RobotMap.agitator1Speed, RobotMap.agitator2Speed);
     }
 
     // Called when another command which requires one or more of the same

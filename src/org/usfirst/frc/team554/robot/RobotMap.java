@@ -50,7 +50,7 @@ public class RobotMap {
 	
 	
 	public static double collectSetIn = 1.0;
-	public static double collectSetOut = -1.0;
+	public static double collectSetShoot = 0.4;
 	
 	public static int cameraWidth = 640;
 	public static int cameraHeigth = 480;
