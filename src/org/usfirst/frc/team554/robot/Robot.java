@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team554.robot.commands.Autonomous_001;
 import org.usfirst.frc.team554.robot.commands.Autonomous_002;
+import org.usfirst.frc.team554.robot.commands.Autonomous_003;
 //import org.usfirst.frc.team554.robot.commands.*;
 import org.usfirst.frc.team554.robot.subsystems.*;
 
@@ -115,6 +116,8 @@ public class Robot extends IterativeRobot {
 			break;
 		case 2: autonomousCommand =	new Autonomous_002();
 			break;
+		case 3: autonomousCommand =	new Autonomous_003();
+		break;
 		default: ;//do nothing
 		};
 
@@ -155,16 +158,19 @@ public class Robot extends IterativeRobot {
 		RobotMap.shotPidKi = prefs.getDouble("ShooterKi", 0.0019);
 		RobotMap.shotPidKd = prefs.getDouble("ShooterKd", 0.0);
 		
-		RobotMap.shotSetPoint1 = prefs.getDouble("ShooterSetPoint1", 2000);
-		RobotMap.shotSetPoint2= prefs.getDouble("ShooterSetPoint2", 2500);
+		RobotMap.shotSetPoint1 = prefs.getDouble("ShooterSetPoint1", 2500);
+		RobotMap.shotSetPoint2= prefs.getDouble("ShooterSetPoint2", 3000);
 		RobotMap.feederSpeed = prefs.getDouble("FeederSpeed", 1.0);
 		RobotMap.agitator1Speed = prefs.getDouble("Agitator1Speed", 1.0);
 		RobotMap.agitator2Speed = prefs.getDouble("Agitator2Speed", 1.0);
 		
-		RobotMap.clmbCurrLimit = prefs.getDouble("ClimbCurrentLimit", 10.0);
+		RobotMap.clmbCurrLimit = prefs.getDouble("ClimbCurrentLimit", 30.0);
 		RobotMap.clmbSpeed = prefs.getDouble("ClimbSpeed", 1.0);
 		
 		RobotMap.DistanceToSlowDown = prefs.getDouble("DistanceSlowDown", 20.0);
+		
+		RobotMap.collectSetIn = prefs.getDouble("PickupCollect",0.75);
+		RobotMap.collectSetShoot = prefs.getDouble("PickupShoot", 0.4);
 		
 		driveTrain.resetEncoder();
 		

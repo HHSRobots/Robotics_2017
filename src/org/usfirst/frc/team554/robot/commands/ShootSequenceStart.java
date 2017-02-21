@@ -1,5 +1,7 @@
 package org.usfirst.frc.team554.robot.commands;
 
+import org.usfirst.frc.team554.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -14,7 +16,7 @@ public class ShootSequenceStart extends CommandGroup {
     	addSequential(new TimeDelay(4.0));
     	addSequential(new Shooter_FeederStart());
     	addParallel(new Agitator_Start());
-    	addParallel(new Collector_Shoot());
+    	addParallel(new Collector_Start(RobotMap.collectSetShoot));
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

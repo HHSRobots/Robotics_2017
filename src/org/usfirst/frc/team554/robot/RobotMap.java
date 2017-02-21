@@ -39,16 +39,16 @@ public class RobotMap {
 	
 		
 	//Constants
-	public static double drvDistPerPulseL = (25.5/23.4)*(0.0486947*127/134); //Encoder Distance per pulse, TODO edit when wheel size chosen
-	public static double drvDistPerPulsR = (25.0/15.0)*(0.0486947*127/134); //Encoder Distance per pulse, TODO edit when wheel size chosen
-	public static double shotDistPerPulse = 1/(20.*35/29); //Encoder Distance per pulse, TODO update with final info.
+	public static double drvDistPerPulseL = (25.5/23.4)*(0.0486947*127/134); 
+	public static double drvDistPerPulsR = (25.0/15.0)*(0.0486947*127/134); 
+	public static double shotDistPerPulse = 1/(20.*35/29); 
 	
 	public static double shotPidKp = 0.0008;
 	public static double shotPidKi = 0.0019;
 	public static double shotPidKd = 0.0;
 	
-	public static double shotSetPoint1 = 2000;
-	public static double shotSetPoint2 = 2500;
+	public static double shotSetPoint1 = 2500;
+	public static double shotSetPoint2 = 3000;
 	
 	
 	public static double collectSetIn = .75;
@@ -61,9 +61,9 @@ public class RobotMap {
 	public static boolean shootCameraSelectedPrev = true;
 	
 	
-	public static double feederSpeed;
-	public static double agitator1Speed;
-	public static double agitator2Speed;
+	public static double feederSpeed = 1.0;
+	public static double agitator1Speed = 1.0;
+	public static double agitator2Speed = 1.0;
 	
 	public static boolean agitatorOn = false;
 	

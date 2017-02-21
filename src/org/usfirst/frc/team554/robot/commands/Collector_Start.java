@@ -1,17 +1,18 @@
 package org.usfirst.frc.team554.robot.commands;
 
 import org.usfirst.frc.team554.robot.Robot;
-import org.usfirst.frc.team554.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Collector_Shoot extends Command {
-
-    public Collector_Shoot() {
+public class Collector_Start extends Command {
+	
+	private double wheelSpeed;
+    public Collector_Start(double collectorSpeed) {
     	requires(Robot.collector);
+    	wheelSpeed = collectorSpeed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -31,7 +32,7 @@ public class Collector_Shoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.collectorMotorSetSpeed(RobotMap.collectSetShoot);
+    	Robot.collector.collectorMotorSetSpeed(wheelSpeed);
     }
 
     // Called when another command which requires one or more of the same

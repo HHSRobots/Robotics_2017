@@ -1,5 +1,7 @@
 package org.usfirst.frc.team554.robot.commands;
 
+import org.usfirst.frc.team554.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -10,7 +12,7 @@ public class CollectSequenceStart extends CommandGroup {
     public CollectSequenceStart() {
     	
     	addParallel(new Agitator_Start());
-    	addSequential(new Collector_In());
+    	addSequential(new Collector_Start(RobotMap.collectSetIn));
     	addSequential(new TimeDelay(5.0));
     	addSequential(new Agitator_Stop());
     	
