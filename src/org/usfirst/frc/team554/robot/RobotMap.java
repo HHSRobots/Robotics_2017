@@ -44,11 +44,12 @@ public class RobotMap {
 	public static double shotDistPerPulse = 1/(20.*35/29); 
 	
 	public static double shotPidKp = 0.0008;
-	public static double shotPidKi = 0.0019;
+	public static double shotPidKi = 0.002;
 	public static double shotPidKd = 0.0;
 	
 	public static double shotSetPoint1 = 2500;
 	public static double shotSetPoint2 = 3000;
+	public static double ShootDelay = 2.0;
 	
 	
 	public static double collectSetIn = .75;

@@ -154,9 +154,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		
 		RobotMap.ClimbComplete = false;
-		RobotMap.shotPidKp = prefs.getDouble("ShooterKp", 0.0008);
-		RobotMap.shotPidKi = prefs.getDouble("ShooterKi", 0.0019);
-		RobotMap.shotPidKd = prefs.getDouble("ShooterKd", 0.0);
+		RobotMap.shotPidKp = prefs.getDouble("ShooterKp", 0.000725);
+		RobotMap.shotPidKi = prefs.getDouble("ShooterKi", 0.002);
 		
 		RobotMap.shotSetPoint1 = prefs.getDouble("ShooterSetPoint1", 2500);
 		RobotMap.shotSetPoint2= prefs.getDouble("ShooterSetPoint2", 3000);
@@ -171,6 +170,8 @@ public class Robot extends IterativeRobot {
 		
 		RobotMap.collectSetIn = prefs.getDouble("PickupCollect",0.75);
 		RobotMap.collectSetShoot = prefs.getDouble("PickupShoot", 0.4);
+
+		RobotMap.ShootDelay = prefs.getDouble("ShootDelay", 2.0);
 		
 		driveTrain.resetEncoder();
 		

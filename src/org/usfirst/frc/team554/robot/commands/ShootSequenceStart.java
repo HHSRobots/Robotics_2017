@@ -13,7 +13,7 @@ public class ShootSequenceStart extends CommandGroup {
     public ShootSequenceStart(double setpoint) {
     	
     	addParallel(new Shooter_Start(setpoint));
-    	addSequential(new TimeDelay(4.0));
+    	addSequential(new TimeDelay(RobotMap.ShootDelay));
     	addSequential(new Shooter_FeederStart());
     	addParallel(new Agitator_Start());
     	addParallel(new Collector_Start(RobotMap.collectSetShoot));
