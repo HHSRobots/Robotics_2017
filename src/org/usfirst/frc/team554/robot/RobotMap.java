@@ -49,7 +49,7 @@ public class RobotMap {
 	
 	public static double shotSetPoint1 = 2500;
 	public static double shotSetPoint2 = 3000;
-	public static double ShootDelay = 2.0;
+	public static double shotDelay = 4.0;
 	
 	
 	public static double collectSetIn = .75;

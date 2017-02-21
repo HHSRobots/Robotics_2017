@@ -171,7 +171,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.collectSetIn = prefs.getDouble("PickupCollect",0.75);
 		RobotMap.collectSetShoot = prefs.getDouble("PickupShoot", 0.4);
 
-		RobotMap.ShootDelay = prefs.getDouble("ShootDelay", 2.0);
+		RobotMap.shotDelay = prefs.getDouble("ShootDelay", 4.0);
 		
 		driveTrain.resetEncoder();
 		
