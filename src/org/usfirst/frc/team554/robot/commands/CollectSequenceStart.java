@@ -11,7 +11,7 @@ public class CollectSequenceStart extends CommandGroup {
     	
     	addParallel(new Agitator_Start());
     	addSequential(new Collector_In());
-    	addSequential(new TimeDelay(10.0));
+    	addSequential(new TimeDelay(5.0));
     	addSequential(new Agitator_Stop());
     	
         // Add Commands here:

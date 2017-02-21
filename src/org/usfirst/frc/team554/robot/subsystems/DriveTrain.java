@@ -31,9 +31,9 @@ public class DriveTrain extends Subsystem {
     	drive = new RobotDrive(leftDriveWheels, rightDriveWheels);
     	drive.setSafetyEnabled(false);    	
     	leftDriveEncoder = new Encoder(RobotMap.ltDrvEncA,RobotMap.ltDrvEncB);
-    	leftDriveEncoder.setDistancePerPulse(RobotMap.drvDistPerPulse);
+    	leftDriveEncoder.setDistancePerPulse(RobotMap.drvDistPerPulseL);
     	rightDriveEncoder = new Encoder(RobotMap.rtDrvEncA,RobotMap.rtDrvEncB);    	
-    	rightDriveEncoder.setDistancePerPulse(RobotMap.drvDistPerPulse);
+    	rightDriveEncoder.setDistancePerPulse(RobotMap.drvDistPerPulsR);
     	gearShift = new Solenoid(RobotMap.gearShiftSolenoid);
     	driveGyro =new AnalogGyro(RobotMap.driveGyro);
     	
@@ -46,7 +46,13 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveJoystick(Joystick drive_Joystick){
-    	drive.arcadeDrive(drive_Joystick, true);
+    	//drive.arcadeDrive(drive_Joystick, true);
+    	if(RobotMap.shootCameraSelected){
+    		drive.arcadeDrive(drive_Joystick.getY(),drive_Joystick.getRawAxis(4)*3/4);
+    	}
+    	else{
+    		drive.arcadeDrive(-drive_Joystick.getY(),drive_Joystick.getRawAxis(4)*3/4);
+    	}
     }
     
     public void driveManual(double rightSpeed, double leftSpeed){
@@ -54,25 +60,31 @@ public class DriveTrain extends Subsystem {
     	rightDriveWheels.set(rightSpeed);
     }
     
-    public void driveAutomaticStraight(double speed, double distance){
-    	resetEncoder();
+    public void driveAutomaticStraight(double distance,double speed){
+    	
+    	drive.arcadeDrive(-speed,0.0);
+   	/*
     	if ( Math.abs( speed) > 0.4 ){
     		if ( (distance - getDriveDistance()) <= RobotMap.DistanceToSlowDown && (distance - getDriveDistance()) > 0 ){
-    			speed = ((speed - 0.4) / 20 * (distance - getDriveDistance()) + 0.4);
+    			speed = ((speed - 0.4) / 20. * (distance - getDriveDistance()) + 0.4);
     		}
     		else if ( (getDriveDistance()- distance ) <= RobotMap.DistanceToSlowDown && (getDriveDistance()- distance) > 0 ){
-    			speed =  -1*((speed - 0.4) / 20 * (distance - getDriveDistance()) + 0.4);
+    			speed =  -1.0*((speed - 0.4) / 20. * (distance - getDriveDistance()) + 0.4);
     		}
     		
     	}	
     	
-    	drive.arcadeDrive(-speed,0);
+    	drive.arcadeDrive(-speed,0.0);
+    */
+    	
     }
+    
     
     
     //Get distance driven
     public double getDriveDistance(){
-    	return (rightDriveEncoder.getDistance()+leftDriveEncoder.getDistance())/2.0;
+    	//return (rightDriveEncoder.getDistance()+leftDriveEncoder.getDistance())/2.0;
+    	return leftDriveEncoder.getDistance();
     }
 	    
     /////////////////////RESET ENCODERS & GYRO/////////////////////////////////

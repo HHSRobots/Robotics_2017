@@ -1,7 +1,6 @@
 package org.usfirst.frc.team554.robot.commands;
 
 import org.usfirst.frc.team554.robot.Robot;
-import org.usfirst.frc.team554.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,8 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shooter_Start extends Command {
 
-    public Shooter_Start() {
+	double setpoint;
+
+	public Shooter_Start(double speed) {
     	requires(Robot.shooter);
+    	setpoint = speed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -31,7 +33,7 @@ public class Shooter_Start extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.startShooterMotor(RobotMap.shotSetPoint);    	
+    	Robot.shooter.startShooterMotor(this.setpoint);    	
     }
 
     // Called when another command which requires one or more of the same

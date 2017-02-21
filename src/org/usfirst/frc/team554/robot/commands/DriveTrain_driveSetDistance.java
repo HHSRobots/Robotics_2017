@@ -1,20 +1,25 @@
 package org.usfirst.frc.team554.robot.commands;
 
 import org.usfirst.frc.team554.robot.Robot;
-import org.usfirst.frc.team554.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class Climb_climbRope extends Command {
-
-    public Climb_climbRope() {
-    	requires(Robot.climb);
-    	requires(Robot.pdp);
+public class DriveTrain_driveSetDistance extends Command {
+	
+	private double MoveDistance;
+	private double MoveSpeed;
+	private double CurrentDistance;
+	
+    public DriveTrain_driveSetDistance(double MoveDistance, double MoveSpeed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.driveTrain);
+    	this.MoveDistance = MoveDistance;
+        this.MoveSpeed = MoveSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -23,22 +28,20 @@ public class Climb_climbRope extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!RobotMap.ClimbComplete){
-    		Robot.climb.climbMotorSetSpeed(RobotMap.clmbSpeed);
-    	}
-    	else{
-    		RobotMap.ClimbComplete = true;
-    	}
+    	Robot.driveTrain.driveAutomaticStraight(MoveDistance,MoveSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return RobotMap.ClimbComplete;
+    	this.CurrentDistance = Robot.driveTrain.getDriveDistance();
+    	SmartDashboard.putNumber("Current Distance", this.CurrentDistance);
+    	return (((MoveSpeed > 0) && (this.CurrentDistance >= this.MoveDistance)) ||
+    			((MoveSpeed < 0) && (this.CurrentDistance <= this.MoveDistance)));
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climb.climbMotorSetSpeed(0.0);
+    	Robot.driveTrain.driveManual(0.0, 0.0);
     }
 
     // Called when another command which requires one or more of the same

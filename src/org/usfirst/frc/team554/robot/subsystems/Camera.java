@@ -40,10 +40,10 @@ public class Camera extends Subsystem {
     		UsbCamera cam1 = new UsbCamera("USB Camera 1",1);
     		cam1.setResolution(RobotMap.cameraWidth, RobotMap.cameraHeigth);
     		cam1.setFPS(RobotMap.cameraFR);
-    		
     		CvSink cvSink1 = CameraServer.getInstance().getVideo(cam0);
     		CvSink cvSink2 = CameraServer.getInstance().getVideo(cam1);
-    		CvSource cvSource = CameraServer.getInstance().putVideo("Current View", 640, 480);
+//    		CvSource cvSource = CameraServer.getInstance().putVideo("Switcher", 640, 480);
+    		CvSource cvSource = CameraServer.getInstance().putVideo("Current View", RobotMap.cameraWidth, RobotMap.cameraHeigth);
     		Mat image = new Mat();
     		
     		while(!Thread.interrupted()) {
@@ -64,13 +64,15 @@ public class Camera extends Subsystem {
             	*/
     			
                 if(RobotMap.shootCameraSelected){
+                	cvSink1.setEnabled(false);
+                	cvSink2.setEnabled(true);
+                	cvSink2.grabFrame(image);  
+                	
+                	
+                } else{
                 	cvSink2.setEnabled(false);
                 	cvSink1.setEnabled(true);
                 	cvSink1.grabFrame(image);
-                } else{
-                	cvSink1.setEnabled(false);
-                	cvSink2.setEnabled(true);
-                	cvSink2.grabFrame(image);   
                 }
                 
                 Imgproc.line(image, new Point(0,RobotMap.cameraHeigth/2), new Point(RobotMap.cameraWidth,RobotMap.cameraHeigth/2),new Scalar(255, 255, 255),5);

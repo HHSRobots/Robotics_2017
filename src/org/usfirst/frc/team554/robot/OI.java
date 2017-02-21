@@ -64,14 +64,13 @@ public class OI {
 		//Operator Controller
 		oButton5.whileHeld(new Climb_climbRope());
 		
-		oButton2.whenPressed(new CollectSequenceStart());
-		oButton3.whenPressed(new CollectSequenceStop());
+		oButton6.whenPressed(new CollectSequenceStart());
+		oButton8.whenPressed(new CollectSequenceStop());
 		
-		oButton8.whenPressed(new ShootSequenceStart());
-		oButton7.whenPressed(new ShootSequenceStop());
+		oButton1.whenPressed(new ShootSequenceStart(RobotMap.shotSetPoint1));
+		oButton2.whenPressed(new ShootSequenceStart(RobotMap.shotSetPoint2));
+		oButton4.whenPressed(new ShootSequenceStop());
 		
-		oButton4.whenPressed(new Shooter_Start());
-		oButton6.whenPressed(new Shooter_Stop());
 		
 		
 	}

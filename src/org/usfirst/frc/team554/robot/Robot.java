@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team554.robot.commands.Autonomous_001;
+import org.usfirst.frc.team554.robot.commands.Autonomous_002;
 //import org.usfirst.frc.team554.robot.commands.*;
 import org.usfirst.frc.team554.robot.subsystems.*;
 
@@ -22,7 +24,6 @@ import org.usfirst.frc.team554.robot.subsystems.*;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Shooter shooter = new Shooter();
 	public static final Collector collector = new Collector();
@@ -106,8 +107,13 @@ public class Robot extends IterativeRobot {
 		//autonomousCommand = chooser.getSelected();
 		autoProgramNumber = thumbwheel.getThumbWheelval();
 		
+		RobotMap.autoDistance = prefs.getDouble("autoDistance", -40.0);
+		RobotMap.autoSpeed = prefs.getDouble("autoSpeed", -0.75);
+		
 		switch (autoProgramNumber) {
-		case 1: ;
+		case 1: autonomousCommand =	new Autonomous_001();
+			break;
+		case 2: autonomousCommand =	new Autonomous_002();
 			break;
 		default: ;//do nothing
 		};
@@ -120,8 +126,10 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		driveTrain.resetDriveGyro();
+		driveTrain.resetEncoder();
+		
+    	if (autonomousCommand != null) autonomousCommand.start();
 	}
 
 	/**
@@ -147,7 +155,8 @@ public class Robot extends IterativeRobot {
 		RobotMap.shotPidKi = prefs.getDouble("ShooterKi", 0.0019);
 		RobotMap.shotPidKd = prefs.getDouble("ShooterKd", 0.0);
 		
-		RobotMap.shotSetPoint = prefs.getDouble("ShooterSetPoint", 2500);
+		RobotMap.shotSetPoint1 = prefs.getDouble("ShooterSetPoint1", 2000);
+		RobotMap.shotSetPoint2= prefs.getDouble("ShooterSetPoint2", 2500);
 		RobotMap.feederSpeed = prefs.getDouble("FeederSpeed", 1.0);
 		RobotMap.agitator1Speed = prefs.getDouble("Agitator1Speed", 1.0);
 		RobotMap.agitator2Speed = prefs.getDouble("Agitator2Speed", 1.0);
@@ -157,6 +166,8 @@ public class Robot extends IterativeRobot {
 		
 		RobotMap.DistanceToSlowDown = prefs.getDouble("DistanceSlowDown", 20.0);
 		
+		driveTrain.resetEncoder();
+		
 	}
 
 	/**
@@ -165,6 +176,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		if(pdp.channelCurrent(RobotMap.clmbPDPch) > RobotMap.clmbCurrLimit){
+			RobotMap.ClimbComplete = true;
+		}
 		log();
 	}
 

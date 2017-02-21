@@ -6,11 +6,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class ShootSequenceStart extends CommandGroup {
-
-    public ShootSequenceStart() {
+	
+	//private double setpoint;
+    public ShootSequenceStart(double setpoint) {
     	
-    	addParallel(new Shooter_Start());
-    	addSequential(new TimeDelay(2.0));
+    	addParallel(new Shooter_Start(setpoint));
+    	addSequential(new TimeDelay(4.0));
     	addSequential(new Shooter_FeederStart());
     	addParallel(new Agitator_Start());
     	addParallel(new Collector_Shoot());

@@ -39,21 +39,23 @@ public class RobotMap {
 	
 		
 	//Constants
-	public static double drvDistPerPulse = 0.0486947*127/134; //Encoder Distance per pulse, TODO edit when wheel size chosen
+	public static double drvDistPerPulseL = (25.5/23.4)*(0.0486947*127/134); //Encoder Distance per pulse, TODO edit when wheel size chosen
+	public static double drvDistPerPulsR = (25.0/15.0)*(0.0486947*127/134); //Encoder Distance per pulse, TODO edit when wheel size chosen
 	public static double shotDistPerPulse = 1/(20.*35/29); //Encoder Distance per pulse, TODO update with final info.
 	
 	public static double shotPidKp = 0.0008;
 	public static double shotPidKi = 0.0019;
 	public static double shotPidKd = 0.0;
 	
-	public static double shotSetPoint = 2500;
+	public static double shotSetPoint1 = 2000;
+	public static double shotSetPoint2 = 2500;
 	
 	
-	public static double collectSetIn = 1.0;
+	public static double collectSetIn = .75;
 	public static double collectSetShoot = 0.4;
 	
-	public static int cameraWidth = 640;
-	public static int cameraHeigth = 480;
+	public static int cameraWidth = 320;
+	public static int cameraHeigth = 240;
 	public static int cameraFR = 30;
 	public static boolean shootCameraSelected = true;
 	public static boolean shootCameraSelectedPrev = true;
@@ -71,6 +73,9 @@ public class RobotMap {
 	public static boolean ClimbComplete = false;
 	
 	public static double DistanceToSlowDown;
+	
+	public static double autoSpeed = -0.75;
+	public static double autoDistance = -40.0;
 	
 	
 	
