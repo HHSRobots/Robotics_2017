@@ -62,20 +62,19 @@ public class DriveTrain extends Subsystem {
     
     public void driveAutomaticStraight(double distance,double speed){
     	
-    	drive.arcadeDrive(-speed,0.0);
-   	/*
-    	if ( Math.abs( speed) > 0.4 ){
+    	
+    	
+    	if (Math.abs(speed) > 0.4){
     		if ( (distance - getDriveDistance()) <= RobotMap.DistanceToSlowDown && (distance - getDriveDistance()) > 0 ){
     			speed = ((speed - 0.4) / 20. * (distance - getDriveDistance()) + 0.4);
     		}
     		else if ( (getDriveDistance()- distance ) <= RobotMap.DistanceToSlowDown && (getDriveDistance()- distance) > 0 ){
     			speed =  -1.0*((speed - 0.4) / 20. * (distance - getDriveDistance()) + 0.4);
     		}
-    		
-    	}	
+    	}
     	
     	drive.arcadeDrive(-speed,0.0);
-    */
+   	
     	
     }
     
